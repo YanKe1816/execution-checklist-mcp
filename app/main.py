@@ -203,3 +203,20 @@ def mcp(request: MCPRequest) -> ChecklistOutput:
         steps=steps,
         human_summary=summary,
     )
+
+
+@app.get("/mcp")
+def mcp_tools() -> dict:
+    return {
+        "tools": [
+            {
+                "name": "generate_checklist",
+                "description": "Convert input text into a structured execution checklist.",
+                "input_schema": {
+                    "text": "string",
+                    "audience": "agent",
+                    "max_steps": "integer (min 3, max 12, default 8)",
+                },
+            }
+        ]
+    }
